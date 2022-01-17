@@ -173,7 +173,7 @@ let
 
       packmol = callPackage ./pkgs/apps/packmol { };
 
-      pegamoid = self.python3.pkgs.callPackage ./pkgs/apps/pegamoid { };
+      pegamoid = self.python3.pkgs.callPackage ./pkgs/apps/pegamoid { inherit (super.libsForQt5) wrapQtAppsHook; };
 
       psi4 = super.python3.pkgs.toPythonApplication self.python3.pkgs.psi4;
 

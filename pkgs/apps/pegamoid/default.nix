@@ -1,5 +1,5 @@
 { buildPythonApplication, fetchFromGitLab, lib
-, numpy, h5py, pyqt5, qtpy, future, vtk
+, numpy, h5py, pyqt5, qtpy, future, vtk, wrapQtAppsHook
 } :
 
 buildPythonApplication rec {
@@ -15,6 +15,16 @@ buildPythonApplication rec {
 
   patches = [
     ./pipVTK.patch
+  ];
+
+  dontWrapQtApps = true;
+
+  preFixup = ''
+    makeWrapperArgs+=("''${qtWrapperArgs[@]}")
+  '';
+
+  nativeBuildInputs = [
+    wrapQtAppsHook
   ];
 
   propagatedBuildInputs = [
